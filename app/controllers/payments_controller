@@ -1,0 +1,66 @@
+class PaymentsController < ApplicationController
+  def new; end
+
+  def create
+    did = payment_params(:did)
+    amount = payment_params(:amount).to_i
+
+    message = SecureRandom.uuid
+    message_digest = Digest::SHA256::digest(message).bth
+    nonce = 1 + SecureRandom.random_number(ECDSA::Group::Secp256k1.order - 1)
+
+    params_json = {
+    "transaction": {
+        "did": did,
+        "acquirerId": current_merchant.id.to_s,
+        "amount": amount,
+        "merchantName": current_merchant.merchant_name,
+        "transactionTime": DateTime.now.to_s
+      },
+      "didVerification": {
+        "messageDigest": message_digest,
+        "nonce": nonce 
+      }
+    }.to_json
+    
+    response = Net::HTTP.post(
+      URI("#{ENV['BRAND_URL']}/authorization"),
+      params_json,
+      'Content-Type' => 'application/json'
+    )
+    body = JSON.parse(response.body)
+    authorization = body['authorization']
+    signature = body['signature']
+
+    unless authorization
+      redirect_to payment_failure_path(reason: '残高不足')
+    end
+      
+    # TODO: resolve DID
+    # TODO: get signing key (w/o privkey)
+
+    # TODO: verify DID (signature)
+    # success = VERIFY-DID
+
+    # tmp
+    success = true
+  
+    if success
+      redirect_to payment_success_path
+    else
+      redirect_to payment_failure_path(reason: '検証失敗')
+    end
+  end
+  
+  def success; end
+  
+  def failure
+    @reason = params[:reason]
+  end
+  
+  private
+  
+  def payment_params
+    params.require(:payment).permit(:did, :amount)
+  end
+end

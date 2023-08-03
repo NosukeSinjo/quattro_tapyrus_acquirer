@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
   
     private
     def merchant_params
-      params.require(:telegram).permit(:did, :acquirerId, :amount, :merchant_name, :transactionTime)
+      params.require(:telegram).permit(:did, :acquirer_id, :amount, :merchant_name, :transaction_time)
     end
   end
   

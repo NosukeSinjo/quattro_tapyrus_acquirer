@@ -5,37 +5,3 @@
 <%= link_to 'Login', login_path %>
 <%= button_to 'Log out', logout_path, method: :delete %>
 
-<header class="header">
-    <p class="index-header">transaction</p>
-</header>
-<div class='new'>
-  <h1 class='new-title'>送金</h1>
-  <%= form_for @telegram, action: :create do |f| %>
-  <table class="new-table">
-    <tr>
-      <th class='new-item'><%= f.label :did, 'did' %></th>
-      <td class='new-body'><%= f.text_field :did %></td>
-    </tr>
-    <tr>
-      <th class='new-item'><%= f.label :acquirerId, '送金先' %></th>
-      <td class='new-body'><%= f.text_field :acquirerId %></td>
-    </tr>
-    <tr>
-      <th class='new-item'><%= f.label :amount, '金額' %></th>
-      <td class='new-body'><%= f.text_field :amount %></td>
-    </tr>
-    <tr>
-      <th class='new-item'><%= f.label :merchant_name, '加盟店名' %></th>
-      <td class='new-body'><%= f.file_field :merchant_name %></td>
-    </tr>
-    <tr>
-      <th class='new-item'><%= f.label :transactionTime, '時間' %></th>
-      <td class='new-body'><%= f.file_field :transactionTime %></td>
-    </tr>
-  
-  </table>
-  
-    <div class='new-submit'><%= f.submit "登録", class: 'submit-button' %></div>
-  
-  <% end %>
-</div>
