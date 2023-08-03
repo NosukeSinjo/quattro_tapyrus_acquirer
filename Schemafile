@@ -5,3 +5,14 @@ create_table 'merchants', comment: '加盟店' do |t|
 
   t.index :merchant_name, unique: true
 end
+
+create_table 'transactions', comment: '電文' do |t|
+  t.string :did, null: false
+
+  t.string :aquirer_id, null: false
+
+  t.integer :amount, null: false
+
+  t.datetime :transactiont_time, null: false
+end
+
