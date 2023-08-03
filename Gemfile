@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'ridgepole'
 gem 'dotenv-rails'
+gem 'tapyrus'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

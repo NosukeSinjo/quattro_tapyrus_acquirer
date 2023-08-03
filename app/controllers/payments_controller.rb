@@ -39,13 +39,26 @@ class PaymentsController < ApplicationController
 
     # TODO: resolve DID
     # TODO: get signing key (w/o privkey)
+    signing_key = {
+      "kty": "EC",
+      "crv": "secp256k1",
+      "x": "EVxNqOJkIOzyshVoIaS0gMUlFJIt4mP57Zsscbi1Yyo",
+      "y": "SGzyJpL_48ejgEl6AGoHBf91zChW1j2TU_fd64Qsrho"
+    }
 
-    # TODO: verify DID (signature)
-    # success = VERIFY-DID
+    params_json = {
+      "signature": signature,
+      "messageDigest": message_digest,
+      "signingKey": signing_key.to_json
+    }.to_json
+    response = Net::HTTP.post(
+      URI("#{ENV['DID_SERVICE_URL']}/did/verify"),
+      params_json,
+      'Content-Type' => 'application/json'
+    )
+    body = JSON.parse(response.body)
+    success = body['success']
 
-    # tmp
-    success = true
-  
     if success
       redirect_to payments_success_path
     else

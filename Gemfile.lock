@@ -69,21 +69,28 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    daemon-spawn (0.4.2)
     date (3.3.3)
     diffy (3.4.2)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
+    ecdsa (1.2.0)
     erubi (1.12.0)
+    eventmachine (1.2.7)
+    eventmachine_httpserver (0.2.1)
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    iniparse (1.5.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    json_pure (2.6.3)
+    leb128 (1.0.0)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -100,6 +107,7 @@ GEM
     mini_mime (1.1.2)
     minitest (5.19.0)
     msgpack (1.7.2)
+    murmurhash3 (0.1.7)
     net-imap (0.3.7)
       date
       net-protocol
@@ -110,6 +118,8 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.3-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.15.3-x86_64-darwin)
       racc (~> 1.4)
     pry (0.14.2)
@@ -181,6 +191,7 @@ GEM
       sprockets-rails
       tilt
     semantic_range (3.0.0)
+    siphash (0.0.1)
     spring (4.1.1)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
@@ -189,7 +200,24 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.6.3-arm64-darwin)
     sqlite3 (1.6.3-x86_64-darwin)
+    tapyrus (0.3.4)
+      activesupport (>= 5.2.3)
+      daemon-spawn
+      ecdsa
+      eventmachine
+      eventmachine_httpserver
+      ffi
+      iniparse
+      json_pure (>= 2.3.1)
+      leb128 (~> 1.0.0)
+      murmurhash3
+      siphash
+      terminal-table (~> 3.0.2)
+      thor
+    terminal-table (3.0.2)
+      unicode-display_width (>= 1.1.1, < 3)
     thor (1.2.2)
     tilt (2.2.0)
     timeout (0.4.0)
@@ -198,6 +226,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (2.4.2)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -214,6 +243,7 @@ GEM
     zeitwerk (2.6.10)
 
 PLATFORMS
+  arm64-darwin-22
   x86_64-darwin-21
 
 DEPENDENCIES
@@ -231,6 +261,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   spring
   sqlite3 (~> 1.4)
+  tapyrus
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
