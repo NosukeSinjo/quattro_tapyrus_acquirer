@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
-  get 'payment', to: 'payments#new'
-  post 'payment', to: 'payment#create'
+  get 'payments', to: 'payments#new'
+  post 'payments', to: 'payments#create'
 
-  get 'payment/success', to: 'payment#success'
-  get 'payment/failure', to: 'payment#failure'
+  get 'payments/success', to: 'payments#success'
+  get 'payments/failure', to: 'payments#failure'
 end

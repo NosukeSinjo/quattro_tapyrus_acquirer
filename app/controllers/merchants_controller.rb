@@ -13,6 +13,8 @@ class MerchantsController < ApplicationController
     else
       render 'new'
     end
+
+    sign_in(@merchant)
   end
 
   private

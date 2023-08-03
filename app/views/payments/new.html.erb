@@ -1,15 +1,14 @@
 <h1>
 </h1>
 
-<%= form_with scope: :payment, url: payment_path do |form| %>
+<%= form_with scope: :payment, url: payments_path do |form| %>
     <div>
       <%= form.text_field :did, placeholder: "did", required: true %>
 
       <%= form.number_field :amount, placeholder: "金額", required: true %>
 
-      
-  
+
+
       <%= form.submit "送金" %>
     </div>
   <% end %>
-  

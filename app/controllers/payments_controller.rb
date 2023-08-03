@@ -2,8 +2,8 @@ class PaymentsController < ApplicationController
   def new; end
 
   def create
-    did = payment_params(:did)
-    amount = payment_params(:amount).to_i
+    did = payment_params[:did]
+    amount = payment_params[:amount].to_i
 
     message = SecureRandom.uuid
     message_digest = Digest::SHA256::digest(message).bth
@@ -22,7 +22,7 @@ class PaymentsController < ApplicationController
         "nonce": nonce 
       }
     }.to_json
-    
+
     response = Net::HTTP.post(
       URI("#{ENV['BRAND_URL']}/authorization"),
       params_json,
@@ -33,9 +33,10 @@ class PaymentsController < ApplicationController
     signature = body['signature']
 
     unless authorization
-      redirect_to payment_failure_path(reason: '残高不足')
+      redirect_to payments_failure_path(reason: '残高不足')
+      return
     end
-      
+
     # TODO: resolve DID
     # TODO: get signing key (w/o privkey)
 
@@ -46,9 +47,9 @@ class PaymentsController < ApplicationController
     success = true
   
     if success
-      redirect_to payment_success_path
+      redirect_to payments_success_path
     else
-      redirect_to payment_failure_path(reason: '検証失敗')
+      redirect_to payments_failure_path(reason: '検証失敗')
     end
   end
   
